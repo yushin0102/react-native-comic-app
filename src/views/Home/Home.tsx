@@ -120,7 +120,7 @@ export default function Home({ navigation }: StackProps) {
   return (
     <View style={styles.root}>
       <StatusBar barStyle="light-content" />
-      <Text style={styles.title}>Home</Text>
+      {/* <Text style={styles.title}>Home</Text> */}
       <View style={styles.container}>
         <View style={styles.searchBar}>
           <AntDesign
@@ -144,12 +144,12 @@ export default function Home({ navigation }: StackProps) {
           ListEmptyComponent={<Text>尚未有聊天內容</Text>}
         />
       </View>
-      <Button
+      {/* <Button
         title="Go to Details"
         titleStyle={styles.buttonTitle}
         style={styles.button}
         onPress={() => navigation.navigate('DetailsStack', { from: 'Home' })}
-      />
+      /> */}
     </View>
   )
 }

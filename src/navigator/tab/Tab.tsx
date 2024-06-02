@@ -1,9 +1,10 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { AntDesign } from '@expo/vector-icons'
-import { colors } from '@theme'
 import { TabParamList, TabBarStatus } from './Tab.typeDefs'
 import { HomeStackNavigator, ProfileStackNavigator } from '../stack/Stack'
+import { Image } from 'expo-image'
+import { images, colors } from '@theme'
+import { StyleSheet } from 'react-native'
 
 const Tab = createBottomTabNavigator<TabParamList>()
 
@@ -11,10 +12,40 @@ const renderTabBarIcon =
   (tabName: keyof TabParamList) => (tabStatus: TabBarStatus) => {
     switch (tabName) {
       case 'HomeTab':
-        return <AntDesign name="home" size={24} color={tabStatus.color} />
-      case 'ProfileTab':
-        return <AntDesign name="profile" size={24} color={tabStatus.color} />
-      // add more...
+        return <Image source={images.pocketPro_logo} style={styles.tabImage} />
+      case 'ContractListTab':
+        return (
+          <Image
+            source={
+              tabStatus.focused
+                ? images.contract_list_filled_icon
+                : images.contract_list_outline_icon
+            }
+            style={styles.tabImage}
+          />
+        )
+      case 'CalendarTab':
+        return (
+          <Image
+            source={
+              tabStatus.focused
+                ? images.calendar_filled_icon
+                : images.calendar_outline_icon
+            }
+            style={styles.tabImage}
+          />
+        )
+      case 'InviteTab':
+        return (
+          <Image
+            source={
+              tabStatus.focused
+                ? images.invite_filled_icon
+                : images.invite_outline_icon
+            }
+            style={styles.tabImage}
+          />
+        )
     }
   }
 
@@ -24,22 +55,31 @@ export default function TabNavigator() {
       screenOptions={({ route }) => ({
         tabBarIcon: renderTabBarIcon(route.name),
         headerShown: false,
-        tabBarInactiveTintColor: colors.gray,
-        tabBarInactiveBackgroundColor: colors.white,
-        tabBarActiveTintColor: colors.lightPurple,
         tabBarActiveBackgroundColor: colors.white,
+        tabBarShowLabel: false, // 移除文字標籤
+        tabBarStyle: styles.tabBar,
       })}
     >
-      <Tab.Screen
-        name="HomeTab"
-        component={HomeStackNavigator}
-        options={{ title: 'Home' }}
-      />
-      <Tab.Screen
-        name="ProfileTab"
-        component={ProfileStackNavigator}
-        options={{ title: 'Profile' }}
-      />
+      <Tab.Screen name="HomeTab" component={HomeStackNavigator} />
+      <Tab.Screen name="ContractListTab" component={ProfileStackNavigator} />
+      <Tab.Screen name="CalendarTab" component={ProfileStackNavigator} />
+      <Tab.Screen name="InviteTab" component={ProfileStackNavigator} />
     </Tab.Navigator>
   )
 }
+
+const styles = StyleSheet.create({
+  tabBar: {
+    backgroundColor: colors.primary,
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    overflow: 'hidden',
+    height: 80,
+  },
+
+  tabImage: {
+    width: 30,
+    height: 26,
+    resizeMode: 'contain',
+  },
+})

@@ -11,11 +11,11 @@
     {
       "files": ["*.ts", "*.tsx", "*.d.ts"],
       "parserOptions": {
-        // "project": "./tsconfig.json"
-        "project": "./react-native-Shin-App/tsconfig.json"
+        "project": "./tsconfig.json"
+        // "project": "./Member.ReactNative/tsconfig.json"
       },
       // 記得push前要改成  "project": "./tsconfig.json"
-      // 正常是使用         "project": "./react-native-Shin-App/tsconfig.json"
+      // 正常是使用         "project": "./Member.ReactNative/tsconfig.json"
       "rules": {
         "import/order": "off"
       }
