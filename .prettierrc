@@ -1,0 +1,14 @@
+{
+  "semi": false,
+  "singleQuote": true,
+  "importOrder":[
+    "^[^./]",
+    "^/src/api",
+    "^/src/stores",
+    "^/src/constants",
+    "^/src/utils",
+    "^/src/components",
+    "^/src/composable",
+    "^\\./"
+  ]
+}

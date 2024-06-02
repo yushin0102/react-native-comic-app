@@ -1,0 +1,24 @@
+{
+  "root": true,
+  "extends": [
+    "universe",
+    "universe/shared/typescript-analysis",
+    "universe/native",
+    "universe/node",
+    "universe/web"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.d.ts"],
+      "parserOptions": {
+        // "project": "./tsconfig.json"
+        "project": "./react-native-Shin-App/tsconfig.json"
+      },
+      // 記得push前要改成  "project": "./tsconfig.json"
+      // 正常是使用         "project": "./react-native-Shin-App/tsconfig.json"
+      "rules": {
+        "import/order": "off"
+      }
+    }
+  ]
+}
