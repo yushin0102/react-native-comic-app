@@ -9,3 +9,9 @@
 設定icon圖片在：src/theme/images.ts
 最下面的footer bar是在：src/navigator/Tab.tsx
 畫相關的頁面是要放在:src/screens
+
+eslintrc設定裡面的parserOptions路徑要整為如下:
+
+記得push前要改成 "project": "./tsconfig.json"
+
+正常是使用"project": "./Member.ReactNative/tsconfig.json"
