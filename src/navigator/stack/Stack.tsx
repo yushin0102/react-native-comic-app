@@ -1,45 +1,47 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import { StackParamList } from './Stack.typeDefs'
 import { DrawerProps } from '../drawer/Drawer.typeDefs'
-import { StackHeaderLeft, StackHeaderTitle } from './components'
+import { StackHeaderLeft, NotificationIcon, ChatRoomIcon } from './components'
 import { colors } from '@theme'
+import { RouteName, RootStackParamList } from '@constants/route'
 
-// views
 import Home from '@views/Home'
 import Details from '@views/Details'
 import Profile from '@views/Profile'
 
-const Stack = createNativeStackNavigator<StackParamList>()
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
-const navigationProps = {
-  headerTintColor: colors.white,
-  headerStyle: { backgroundColor: colors.darkPurple },
+const navigationProps = (navigation: DrawerProps['navigation']) => ({
+  headerStyle: { backgroundColor: colors.primaryBgColor },
   headerTitleStyle: { fontSize: 18 },
-}
+  headerLeft: () => (
+    <StackHeaderLeft onPress={() => navigation.toggleDrawer()} />
+  ),
+  headerRight: () => (
+    <>
+      <NotificationIcon />
+      <ChatRoomIcon />
+    </>
+  ),
+})
 
 export function HomeStackNavigator({ navigation }: DrawerProps) {
   return (
-    <Stack.Navigator screenOptions={navigationProps}>
+    <Stack.Navigator screenOptions={navigationProps(navigation)}>
       <Stack.Screen
         component={Home}
-        name="HomeStack"
+        name={RouteName.ChatList}
         options={{
-          title: 'Home',
-          headerTitle: () => <StackHeaderTitle />,
-          headerLeft: () => (
-            <StackHeaderLeft onPress={() => navigation.toggleDrawer()} />
-          ),
           headerTitleAlign: 'center',
+          headerTitle: '',
         }}
       />
       <Stack.Screen
         component={Details}
-        name="DetailsStack"
+        name={RouteName.Details}
         options={{
-          title: 'Details',
-          headerTitle: () => <StackHeaderTitle />,
           headerTitleAlign: 'center',
+          headerTitle: '',
         }}
       />
     </Stack.Navigator>
@@ -48,26 +50,21 @@ export function HomeStackNavigator({ navigation }: DrawerProps) {
 
 export function ProfileStackNavigator({ navigation }: DrawerProps) {
   return (
-    <Stack.Navigator screenOptions={navigationProps}>
+    <Stack.Navigator screenOptions={navigationProps(navigation)}>
       <Stack.Screen
         component={Profile}
-        name="ProfileStack"
+        name={RouteName.Profile}
         options={{
-          title: 'Profile',
-          headerTitle: () => <StackHeaderTitle />,
-          headerLeft: () => (
-            <StackHeaderLeft onPress={() => navigation.toggleDrawer()} />
-          ),
           headerTitleAlign: 'center',
+          headerTitle: '',
         }}
       />
       <Stack.Screen
         component={Details}
-        name="DetailsStack"
+        name={RouteName.Details}
         options={{
-          title: 'Details',
-          headerTitle: () => <StackHeaderTitle />,
           headerTitleAlign: 'center',
+          headerTitle: '',
         }}
       />
     </Stack.Navigator>

@@ -54,23 +54,13 @@ export default function Profile({ navigation }: StackProps) {
         <Text>我的收藏</Text>
         <Text>我的優惠券</Text>
         <Text>我的訂單</Text>
-        <Text>我的地址</Text>
-        <Text>我的優惠券</Text>
-        <Text>我的訂單</Text>
-        <Text>我的地址</Text>
-        <Text>我的優惠券</Text>
-        <Text>我的訂單</Text>
-        <Text>我的地址</Text>
-        <Text>我的優惠券</Text>
-        <Text>我的訂單</Text>
-        <Text>我的地址</Text>
       </View>
       <Button
         title="Go to Details"
         titleStyle={styles.buttonTitle}
         style={styles.button}
         onPress={() => {
-          navigation.navigate('DetailsStack', { from: 'Profile' })
+          navigation.navigate('Details', { from: 'Profile' })
         }}
       />
     </View>

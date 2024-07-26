@@ -10,9 +10,9 @@
     "icon": "./assets/images/logo-lg.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/logo/pocketProsplash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FFEBD4"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {

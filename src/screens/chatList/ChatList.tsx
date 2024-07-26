@@ -52,7 +52,7 @@ const ChatList: React.FC<ChatItemProps> = ({ item }) => {
         <View style={styles.chatContainer}>
           <View style={styles.chatAvatar}>
             <Image
-              source={images.chat_room_default_img}
+              source={images.chatRoomUserDefaultImg}
               style={styles.chatImage}
             />
           </View>

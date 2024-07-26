@@ -6,8 +6,8 @@ export function StackHeaderLeft({ onPress }: { onPress: () => void }) {
   return (
     <SimpleLineIcons.Button
       name="menu"
-      size={24}
-      color={colors.white}
+      size={20}
+      color={colors.primaryColor}
       backgroundColor={colors.transparent}
       onPress={onPress}
     />

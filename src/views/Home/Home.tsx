@@ -77,7 +77,7 @@ export interface ChatListData {
 
 export default function Home({ navigation }: StackProps) {
   const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0ZWM3NTRhNy1kNWVhLTQ4YTAtYTVjMi0xYzBjODRhNzcxNWIiLCJqdGkiOiJhZTA3ODJiYy0xMDJmLTQ1NzYtYmRkZS1iNWIyOTI5Y2RiNDAiLCJuYmYiOjE3MTcyOTk3NTksImV4cCI6MTcxNzk0Nzc1OSwiaWF0IjoxNzE3Mjk5NzU5LCJpc3MiOiJNZW1iZXIuQVBJIn0.gPZU7Ltk8AiTdh8LR9TQbC6iO6wM_bSQZM5pDhaayIA'
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4ZDBlMTlhMi01N2YyLTQ4YWItOTVjNi0yZjU2M2M1MzQzZDIiLCJqdGkiOiI2NDM4MmYzNC1jYjRjLTQzMmYtYmUwZS0yMGNjM2Y3NWRhY2IiLCJuYmYiOjE3MjE5NjI2MTEsImV4cCI6MTcyMjYxMDYxMSwiaWF0IjoxNzIxOTYyNjExLCJpc3MiOiJNZW1iZXIuQVBJIn0.AF9oTz1CuT6PmkKkX3bK1Z2OQH-7kY-i0pW9H2QdAKA'
   const [page, setPage] = useState<number>(1)
   const [size, setSize] = useState<number>(10)
   const [search, setSearch] = useState<string>('')
@@ -119,7 +119,7 @@ export default function Home({ navigation }: StackProps) {
 
   return (
     <View style={styles.root}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       {/* <Text style={styles.title}>Home</Text> */}
       <View style={styles.container}>
         <View style={styles.searchBar}>

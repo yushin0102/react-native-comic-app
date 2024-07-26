@@ -1,2 +1,3 @@
 export * from './StackHeaderLeft'
-export * from './StackHeaderTitle'
+export * from './NotificationIcon'
+export * from './ChatRoomIcon'
