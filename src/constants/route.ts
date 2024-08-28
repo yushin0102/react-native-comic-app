@@ -1,14 +1,12 @@
 export const RouteName = {
-  Home: 'Home',
-  Profile: 'profile',
-  Settings: 'Settings',
-  Details: 'Details',
-  ChatList: 'chat-list',
-  Chat: 'chat',
-  ContractList: 'contractList',
+  Home: '首頁',
+  Profile: '我的',
+  Settings: '設定',
+  Details: '詳細資料',
+  ContractList: '不知叫啥',
   TaskCalendar: 'task-calendar',
-  Invite: 'invite',
-  InviteDetail: 'invite-detail',
+  BookFavorites: '書架',
+  BookFavoritesDetail: '書架內頁',
   LatestUpdates: 'latest-updates', // 最新更新
   NewArrivals: 'new-arrivals', // 最新上架
   PopularList: 'popular-list', // 人氣榜
@@ -21,12 +19,10 @@ export type RootStackParamList = {
   [RouteName.Details]: undefined
   [RouteName.Profile]: { username: string }
   [RouteName.Settings]: { theme: string }
-  [RouteName.ChatList]: undefined
-  [RouteName.Chat]: { userId: string }
   [RouteName.ContractList]: { contractId: string }
   [RouteName.TaskCalendar]: { taskId: string }
-  [RouteName.Invite]: undefined
-  [RouteName.InviteDetail]: { inviteId: string }
+  [RouteName.BookFavorites]: undefined
+  [RouteName.BookFavoritesDetail]: { BookFavoritesId: string }
   [RouteName.LatestUpdates]: undefined // 最新更新
   [RouteName.NewArrivals]: undefined // 最新上架
   [RouteName.PopularList]: undefined // 人氣榜

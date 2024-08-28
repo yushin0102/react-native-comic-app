@@ -1,13 +1,14 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { DrawerProps } from '../drawer/Drawer.typeDefs'
-import { StackHeaderLeft, NotificationIcon } from './components'
+import { StackHeaderLeft } from '@views/StackHeader/Home/StackHeaderLeft'
+import { HomeSearch } from '@views/StackHeader/Home/HomeSearch'
 import { colors } from '@theme'
 import { RouteName, RootStackParamList } from '@constants/route'
-
-import Home from '@views/Home'
+import FavoritesScreen from '@screens/Favorites/FavoritesScreen'
 import Details from '@views/Details'
 import Profile from '@views/Profile'
+import { FavoritesLeft, FavoritesRight } from '@views/StackHeader/Favorites'
 
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
@@ -19,17 +20,17 @@ const navigationProps = (navigation: DrawerProps['navigation']) => ({
   ),
   headerRight: () => (
     <>
-      <NotificationIcon />
+      <HomeSearch />
     </>
   ),
 })
 
-export function HomeStackNavigator({ navigation }: DrawerProps) {
+export function ProfileStackNavigator({ navigation }: DrawerProps) {
   return (
     <Stack.Navigator screenOptions={navigationProps(navigation)}>
       <Stack.Screen
-        component={Home}
-        name={RouteName.ChatList}
+        component={Profile}
+        name={RouteName.Profile}
         options={{
           headerTitleAlign: 'center',
           headerTitle: '',
@@ -47,21 +48,15 @@ export function HomeStackNavigator({ navigation }: DrawerProps) {
   )
 }
 
-export function ProfileStackNavigator({ navigation }: DrawerProps) {
+export function FavoritesScreenStackNavigator({ navigation }: DrawerProps) {
   return (
     <Stack.Navigator screenOptions={navigationProps(navigation)}>
       <Stack.Screen
-        component={Profile}
-        name={RouteName.Profile}
+        component={FavoritesScreen}
+        name={RouteName.BookFavorites}
         options={{
-          headerTitleAlign: 'center',
-          headerTitle: '',
-        }}
-      />
-      <Stack.Screen
-        component={Details}
-        name={RouteName.Details}
-        options={{
+          headerLeft: () => <FavoritesLeft />,
+          headerRight: () => <FavoritesRight />,
           headerTitleAlign: 'center',
           headerTitle: '',
         }}

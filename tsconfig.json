@@ -14,7 +14,8 @@
       "@utils/*": ["./src/utils/*"],
       "@theme": ["./src/theme/index.ts"],
       "@modules/*": ["./src/modules/*"],
-      "@constants/*": ["./src/constants/*"]
+      "@constants/*": ["./src/constants/*"],
+      "@screens/*": ["./src/screens/*"]
     }
   }
 }

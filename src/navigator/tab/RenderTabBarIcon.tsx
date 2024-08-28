@@ -1,48 +1,53 @@
 import React from 'react'
 import { TabBarStatus } from './Tab.typeDefs'
 import { Image } from 'expo-image'
-import { images, colors } from '@theme'
+import { images } from '@theme'
+import FontAwesome from '@expo/vector-icons/FontAwesome'
 import { StyleSheet } from 'react-native'
 import { RootStackParamList, RouteName } from '@constants/route'
-import Octicons from '@expo/vector-icons/Octicons'
+import Ionicons from '@expo/vector-icons/Ionicons'
 const RenderTabBarIcon =
   (tabName: keyof RootStackParamList) => (tabStatus: TabBarStatus) => {
     switch (tabName) {
       case RouteName.Home:
-        return <Image source={images.pocketPro_logo} style={styles.tabImage} />
-      case RouteName.ContractList:
         return (
-          <Image
+          <Ionicons
             style={styles.tabImage}
-            source={
-              tabStatus.focused
-                ? images.contractListFilledIcon
-                : images.contractListOutlineIcon
-            }
-          />
-        )
-      case RouteName.TaskCalendar:
-        return (
-          <Octicons
-            style={styles.tabImage}
-            name="home"
+            name={tabStatus.focused ? 'home-sharp' : 'home-outline'}
             size={24}
             color="black"
           />
         )
-      case RouteName.Invite:
+      case RouteName.ContractList:
+        return (
+          <Ionicons
+            style={styles.tabImage}
+            name={
+              tabStatus.focused ? 'game-controller' : 'game-controller-outline'
+            }
+            size={24}
+            color="black"
+          />
+        )
+      case RouteName.BookFavorites:
         return (
           <Image
             style={styles.tabImage}
             source={
               tabStatus.focused
-                ? images.inviteFilledIcon
-                : images.inviteOutlineIcon
+                ? images.bookFavoritesFilledIcon
+                : images.bookFavoritesOutlineIcon
             }
           />
         )
       case RouteName.Profile:
-        return <Image style={styles.userImage} source={images.testUserIcon} />
+        return (
+          <FontAwesome
+            name={tabStatus.focused ? 'user-circle-o' : 'user-o'}
+            size={24}
+            color="black"
+          />
+        )
       default:
         return null
     }

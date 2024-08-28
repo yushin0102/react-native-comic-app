@@ -6,7 +6,7 @@ import { Image } from 'expo-image'
 import { AntDesign } from '@expo/vector-icons'
 
 import EvilIcons from '@expo/vector-icons/EvilIcons'
-export function NotificationIcon() {
+export function HomeSearch() {
   const navigation = useNavigation()
 
   const handlePress = () => {
