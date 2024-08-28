@@ -3,7 +3,9 @@ import { TouchableOpacity, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { images, colors } from '@theme'
 import { Image } from 'expo-image'
+import { AntDesign } from '@expo/vector-icons'
 
+import EvilIcons from '@expo/vector-icons/EvilIcons'
 export function NotificationIcon() {
   const navigation = useNavigation()
 
@@ -14,7 +16,7 @@ export function NotificationIcon() {
 
   return (
     <TouchableOpacity onPress={handlePress} style={styles.button}>
-      <Image source={images.notificationIcon} style={styles.icon} />
+      <AntDesign name="search1" size={20} color="#495B7D" />
     </TouchableOpacity>
   )
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { DrawerProps } from '../drawer/Drawer.typeDefs'
-import { StackHeaderLeft, NotificationIcon, ChatRoomIcon } from './components'
+import { StackHeaderLeft, NotificationIcon } from './components'
 import { colors } from '@theme'
 import { RouteName, RootStackParamList } from '@constants/route'
 
@@ -12,7 +12,7 @@ import Profile from '@views/Profile'
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const navigationProps = (navigation: DrawerProps['navigation']) => ({
-  headerStyle: { backgroundColor: colors.primaryBgColor },
+  headerStyle: { backgroundColor: colors.white },
   headerTitleStyle: { fontSize: 18 },
   headerLeft: () => (
     <StackHeaderLeft onPress={() => navigation.toggleDrawer()} />
@@ -20,7 +20,6 @@ const navigationProps = (navigation: DrawerProps['navigation']) => ({
   headerRight: () => (
     <>
       <NotificationIcon />
-      <ChatRoomIcon />
     </>
   ),
 })

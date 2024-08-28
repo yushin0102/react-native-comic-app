@@ -1,15 +1,26 @@
 import React from 'react'
-import { SimpleLineIcons } from '@expo/vector-icons'
-import { colors } from '@theme'
+import { Text, View, StyleSheet } from 'react-native'
 
 export function StackHeaderLeft({ onPress }: { onPress: () => void }) {
   return (
-    <SimpleLineIcons.Button
-      name="menu"
-      size={20}
-      color={colors.primaryColor}
-      backgroundColor={colors.transparent}
-      onPress={onPress}
-    />
+    <View style={styles.layoutHeader}>
+      <Text style={styles.layoutDesc}>更新</Text>
+      <Text style={styles.layoutDesc}>推薦</Text>
+      <Text style={styles.layoutDesc}>男生</Text>
+      <Text style={styles.layoutDesc}>女生</Text>
+    </View>
   )
 }
+
+const styles = StyleSheet.create({
+  layoutHeader: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  layoutDesc: {
+    fontSize: 16,
+    padding: 10,
+  },
+})

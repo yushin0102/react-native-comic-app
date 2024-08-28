@@ -4,7 +4,7 @@ import { Image } from 'expo-image'
 import { images, colors } from '@theme'
 import { StyleSheet } from 'react-native'
 import { RootStackParamList, RouteName } from '@constants/route'
-
+import Octicons from '@expo/vector-icons/Octicons'
 const RenderTabBarIcon =
   (tabName: keyof RootStackParamList) => (tabStatus: TabBarStatus) => {
     switch (tabName) {
@@ -23,13 +23,11 @@ const RenderTabBarIcon =
         )
       case RouteName.TaskCalendar:
         return (
-          <Image
+          <Octicons
             style={styles.tabImage}
-            source={
-              tabStatus.focused
-                ? images.calendarFilledIcon
-                : images.calendarOutlineIcon
-            }
+            name="home"
+            size={24}
+            color="black"
           />
         )
       case RouteName.Invite:
@@ -53,17 +51,9 @@ const RenderTabBarIcon =
 export default RenderTabBarIcon
 
 const styles = StyleSheet.create({
-  tabBar: {
-    backgroundColor: colors.primary,
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
-    overflow: 'hidden',
-    height: 80,
-  },
-
   tabImage: {
-    width: 30,
-    height: 26,
+    width: 34,
+    height: 30,
     resizeMode: 'contain',
   },
   userImage: {

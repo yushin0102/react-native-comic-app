@@ -26,8 +26,7 @@ export default function TabNavigator() {
         name={RouteName.ContractList}
         component={ProfileStackNavigator}
       />
-      <Tab.Screen name={RouteName.Home} component={HomeStackNavigator} />
-      <Tab.Screen name={RouteName.Invite} component={ProfileStackNavigator} />
+      <Tab.Screen name={RouteName.Invite} component={HomeStackNavigator} />
       <Tab.Screen name={RouteName.Profile} component={ProfileStackNavigator} />
     </Tab.Navigator>
   )
@@ -35,21 +34,6 @@ export default function TabNavigator() {
 
 const styles = StyleSheet.create({
   tabBar: {
-    backgroundColor: colors.primary,
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
-    overflow: 'hidden',
-    height: 80,
-  },
-
-  tabImage: {
-    width: 30,
-    height: 26,
-    resizeMode: 'contain',
-  },
-  userImage: {
-    width: 50,
-    height: 50,
-    resizeMode: 'cover',
+    height: 85,
   },
 })
