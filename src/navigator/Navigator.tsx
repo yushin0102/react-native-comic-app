@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { View } from 'react-native'
-import { NavigationContainer } from '@react-navigation/native'
+import { NavigationContainer, DefaultTheme } from '@react-navigation/native'
 import * as SplashScreen from 'expo-splash-screen'
 import { useAppSlice, useAppService, IUser } from '@modules/app'
 import BottomSheet from '@components/BottomSheet'
@@ -65,9 +65,17 @@ function Navigator() {
   // TODO: switch router by loggedIn status
   console.log('[##] loggedIn', loggedIn)
 
+  const defaultCustomThem = {
+    ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      background: 'white', // 設定導航容器的背景色
+    },
+  }
+
   return checked && loggedIn ? (
     <>
-      <NavigationContainer>
+      <NavigationContainer theme={defaultCustomThem}>
         <DrawerNavigator />
       </NavigationContainer>
       {!isWeb && (

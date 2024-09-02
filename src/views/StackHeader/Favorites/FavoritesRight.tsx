@@ -1,22 +1,14 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, Text } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import { images, colors } from '@theme'
-import { Image } from 'expo-image'
-import { AntDesign } from '@expo/vector-icons'
+import { FavoritesScreenProps } from '@screens/Favorites/type'
 
-import EvilIcons from '@expo/vector-icons/EvilIcons'
-export function FavoritesRight() {
-  const navigation = useNavigation()
-
-  const handlePress = () => {
-    // navigation.navigate('Home')
-    console.log('通知')
-  }
-
+export const FavoritesRight: React.FC<FavoritesScreenProps> = ({
+  onToggleEditMode,
+  isEditing,
+}) => {
   return (
-    <TouchableOpacity onPress={handlePress} style={styles.button}>
-      <Text>編輯</Text>
+    <TouchableOpacity onPress={onToggleEditMode} style={styles.button}>
+      <Text>{isEditing ? '取消' : '編輯'}</Text>
     </TouchableOpacity>
   )
 }
@@ -24,10 +16,5 @@ export function FavoritesRight() {
 const styles = StyleSheet.create({
   button: {
     padding: 10,
-  },
-  icon: {
-    width: 22,
-    height: 24,
-    resizeMode: 'contain',
   },
 })

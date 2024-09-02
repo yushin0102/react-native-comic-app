@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { DrawerProps } from '../drawer/Drawer.typeDefs'
 import { StackHeaderLeft } from '@views/StackHeader/Home/StackHeaderLeft'
 import { HomeSearch } from '@views/StackHeader/Home/HomeSearch'
-import { colors } from '@theme'
 import { RouteName, RootStackParamList } from '@constants/route'
 import FavoritesScreen from '@screens/Favorites/FavoritesScreen'
 import Details from '@views/Details'
@@ -13,8 +12,6 @@ import { FavoritesLeft, FavoritesRight } from '@views/StackHeader/Favorites'
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const navigationProps = (navigation: DrawerProps['navigation']) => ({
-  headerStyle: { backgroundColor: colors.white },
-  headerTitleStyle: { fontSize: 18 },
   headerLeft: () => (
     <StackHeaderLeft onPress={() => navigation.toggleDrawer()} />
   ),
@@ -49,18 +46,36 @@ export function ProfileStackNavigator({ navigation }: DrawerProps) {
 }
 
 export function FavoritesScreenStackNavigator({ navigation }: DrawerProps) {
+  const [isEditing, setIsEditing] = useState<boolean>(false)
+  const handleRemoveItem = () => {
+    setIsEditing((prevState) => !prevState)
+  }
+
   return (
     <Stack.Navigator screenOptions={navigationProps(navigation)}>
       <Stack.Screen
-        component={FavoritesScreen}
         name={RouteName.BookFavorites}
         options={{
           headerLeft: () => <FavoritesLeft />,
-          headerRight: () => <FavoritesRight />,
+          headerRight: () => (
+            <FavoritesRight
+              onToggleEditMode={handleRemoveItem}
+              isEditing={isEditing}
+            />
+          ),
           headerTitleAlign: 'center',
           headerTitle: '',
+          headerShadowVisible: false,
         }}
-      />
+      >
+        {(props) => (
+          <FavoritesScreen
+            {...props}
+            onToggleEditMode={handleRemoveItem}
+            isEditing={isEditing}
+          />
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
   )
 }
