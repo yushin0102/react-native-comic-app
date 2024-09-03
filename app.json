@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "react-native-boilerplate",
-    "slug": "react-native-boilerplate",
-    "owner": "wataru",
+    "name": "rn-comic-app",
+    "slug": "rn-comic-app",
+    "owner": "shinouo",
     "privacy": "unlisted",
     "version": "1.0.0",
     "platforms": ["ios", "android", "web"],
@@ -12,7 +12,7 @@
     "splash": {
       "image": "./assets/images/logo-lg.png",
       "resizeMode": "contain",
-      "backgroundColor": "white"
+      "backgroundColor": "#FFFFFF"
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -21,7 +21,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/logo-sm.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
@@ -29,11 +29,11 @@
     },
     "extra": {
       "eas": {
-        "projectId": "18adc0d0-eb1d-11e9-8009-d524ed5cc4a7"
+        "projectId": "820a60c4-cda0-45d9-8da0-085cdeae1ca9"
       }
     },
     "updates": {
-      "url": "https://u.expo.dev/18adc0d0-eb1d-11e9-8009-d524ed5cc4a7"
+      "url": "https://u.expo.dev/820a60c4-cda0-45d9-8da0-085cdeae1ca9"
     },
     "runtimeVersion": {
       "policy": "sdkVersion"

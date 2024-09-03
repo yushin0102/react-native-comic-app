@@ -12,8 +12,8 @@ export default ({ config: expoConfig }: ConfigContext): ExpoConfig => {
    */
   function setDevConfig() {
     name = `DEV - ${expoConfig.name}`
-    slug = 'react-native-boilerplate-dev'
-    projectId = '3a2f44a2-b2cb-4445-91e0-5e41dad0b0c4'
+    slug = 'rn-comic-app'
+    projectId = '820a60c4-cda0-45d9-8da0-085cdeae1ca9'
     ios = {
       bundleIdentifier: 'com.watarumaeda.react-native-boilerplate-dev',
       buildNumber: '1.0.0',
@@ -29,8 +29,8 @@ export default ({ config: expoConfig }: ConfigContext): ExpoConfig => {
    */
   function setProdConfig() {
     name = expoConfig.name ?? ''
-    slug = 'react-native-boilerplate'
-    projectId = '18adc0d0-eb1d-11e9-8009-d524ed5cc4a7'
+    slug = 'rn-comic-app'
+    projectId = '820a60c4-cda0-45d9-8da0-085cdeae1ca9'
     ios = {
       bundleIdentifier: 'com.watarumaeda.react-native-boilerplate',
       buildNumber: '1.0.0',
