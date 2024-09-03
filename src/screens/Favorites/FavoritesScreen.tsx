@@ -4,16 +4,14 @@ import {
   Text,
   StyleSheet,
   FlatList,
-  ListRenderItem,
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 
-import { Image } from 'expo-image'
 import { colors } from '@theme'
 import { FavoritesScreenProps, FavoritesComic } from '@screens/Favorites/type'
-
+import FavoriteItem from '@views/StackHeader/Favorites/FavoritesItems'
 const comicsData: FavoritesComic[] = [
   {
     id: '1',
@@ -67,6 +65,7 @@ const FavoritesScreen: React.FC<FavoritesScreenProps> = ({
   }
 
   const handleDeleteItem = (id: string[]) => {
+    if (id.length === 0) return
     setDefaultData((prv) => prv.filter((item) => !id.includes(item.id)))
     onToggleEditMode()
   }
@@ -85,43 +84,22 @@ const FavoritesScreen: React.FC<FavoritesScreenProps> = ({
     }
   }, [isEditing])
 
-  const renderItem: ListRenderItem<FavoritesComic> = ({ item }) => (
-    <View style={styles.favoritesContainer}>
-      <View style={styles.imgesContext}>
-        <Image
-          source={item.imageUrl}
-          style={!isEditing ? styles.image : styles.favoritesHidden}
-        />
-        {item.newUpdate && (
-          <View style={styles.imgText}>
-            <Text>New</Text>
-          </View>
-        )}
-        <TouchableOpacity
-          style={
-            isEditing && [
-              styles.circle,
-              selectedIds.includes(item.id) && styles.checkedCircle,
-            ]
-          }
-          onPress={() => handleToggleSelect(item.id)}
-        >
-          {selectedIds.includes(item.id) && isEditing && (
-            <View style={styles.innerCircle} />
-          )}
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.comicTitle} numberOfLines={1} ellipsizeMode="tail">
-        {item.title}
-      </Text>
-      <Text style={styles.comicTagText} numberOfLines={1}>
-        {item.comicTag}
-      </Text>
-    </View>
+  const renderItem = ({ item }: { item: FavoritesComic }) => (
+    <FavoriteItem
+      item={item}
+      isEditing={isEditing}
+      selectedIds={selectedIds}
+      onToggleSelect={handleToggleSelect}
+    />
   )
 
   return (
     <>
+      {defaultData.length === 0 && (
+        <View style={styles.notFoundFavoritesItems}>
+          <Text style={styles.notFoundFavoritesText}>目前尚無收藏</Text>
+        </View>
+      )}
       <FlatList
         data={defaultData}
         renderItem={renderItem}
@@ -129,7 +107,7 @@ const FavoritesScreen: React.FC<FavoritesScreenProps> = ({
         numColumns={3}
         contentContainerStyle={styles.listContainer}
       />
-      {isEditing && (
+      {isEditing && defaultData.length !== 0 && (
         <TouchableWithoutFeedback onPress={onToggleEditMode}>
           <View style={styles.fullScreenModalContainer}>
             <TouchableWithoutFeedback>
@@ -156,70 +134,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     backgroundColor: colors.white,
   },
-  favoritesContainer: {
-    flex: 1,
-    margin: 10,
-  },
 
-  imgesContext: {
-    position: 'relative',
-  },
-  image: {
-    width: '100%',
-    height: 150,
-    borderRadius: 10,
-  },
-  favoritesHidden: {
-    width: '100%',
-    height: 150,
-    borderRadius: 10,
-    opacity: 0.5,
-  },
-  imgText: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    backgroundColor: colors.comicHintGreen,
-    color: colors.white,
-    fontWeight: 'bold',
-    fontSize: 16,
-    paddingHorizontal: 10,
-    paddingVertical: 2,
-    borderTopRightRadius: 2,
-    borderBottomRightRadius: 16,
-  },
-  comicTitle: {
-    marginTop: 10,
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  comicTagText: {
-    marginTop: 5,
-    fontSize: 16,
-    color: colors.comicDarkGray,
-    textAlign: 'center',
-  },
-  circle: {
-    position: 'absolute',
-    right: 5,
-    bottom: 5,
-    height: 24,
-    width: 24,
-    borderRadius: 50,
-    borderWidth: 2,
-    borderColor: '#CCCCCC',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  checkedCircle: {
-    borderColor: 'black',
-  },
-  innerCircle: {
-    height: 24,
-    width: 24,
-    borderRadius: 12,
-    backgroundColor: colors.comicHintGreen,
-  },
   fullScreenModalContainer: {
     position: 'absolute',
     left: 0,
@@ -251,6 +166,15 @@ const styles = StyleSheet.create({
   },
   modalText: {
     fontSize: 18,
+  },
+  notFoundFavoritesItems: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  notFoundFavoritesText: {
+    fontSize: 30,
+    color: colors.comicDarkGray,
   },
 })
 
