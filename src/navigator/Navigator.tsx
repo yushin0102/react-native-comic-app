@@ -5,11 +5,11 @@ import * as SplashScreen from 'expo-splash-screen'
 import { useAppSlice, useAppService, IUser } from '@modules/app'
 import BottomSheet from '@components/BottomSheet'
 import { WelcomeBottomSheetContents } from '@layouts/BottomSheetContents'
-import DrawerNavigator from './drawer'
+// import DrawerNavigator from './drawer'
 import { loadImages, loadFonts } from '@theme'
 import { useDataPersist, DataPersistKeys } from '@hooks'
 import { isWeb } from '@utils/deviceInfo'
-
+import TabNavigator from './tab/Tab'
 // keep the splash screen visible while complete fetching resources
 SplashScreen.preventAutoHideAsync()
 
@@ -76,7 +76,7 @@ function Navigator() {
   return checked && loggedIn ? (
     <>
       <NavigationContainer theme={defaultCustomThem}>
-        <DrawerNavigator />
+        <TabNavigator />
       </NavigationContainer>
       {!isWeb && (
         <BottomSheet isOpen={isOpen} initialOpen>

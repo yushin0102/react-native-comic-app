@@ -12,7 +12,6 @@ const RenderTabBarIcon =
       case RouteName.Home:
         return (
           <Ionicons
-            style={styles.tabImage}
             name={tabStatus.focused ? 'home-sharp' : 'home-outline'}
             size={24}
             color="black"
@@ -21,7 +20,6 @@ const RenderTabBarIcon =
       case RouteName.ContractList:
         return (
           <Ionicons
-            style={styles.tabImage}
             name={
               tabStatus.focused ? 'game-controller' : 'game-controller-outline'
             }

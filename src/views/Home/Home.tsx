@@ -1,32 +1,168 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   Text,
   View,
   StyleSheet,
-  StatusBar,
-  ActivityIndicator,
-  TextInput,
-  FlatList,
+  SectionList,
+  ListRenderItem,
 } from 'react-native'
-import axios from 'axios'
 import Button from '@components/Button'
-import { StackProps } from '@navigator/stack'
+import ClassicComic from '@views/Home/ClassicComic'
+import RecentScrollView from '@views/Home/RecentScrollView'
 import { colors } from '@theme'
-import { useQuery } from '@tanstack/react-query'
-import { AntDesign } from '@expo/vector-icons'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import ChatList from 'src/screens/chatList/ChatList'
+import MaterialIcons from '@expo/vector-icons/MaterialIcons'
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons'
+import AntDesign from '@expo/vector-icons/AntDesign'
+import CategoryItem from './CategoryItem'
+import { RouteName } from '@constants/route'
+import Ionicons from '@expo/vector-icons/Ionicons'
+
+type SectionItem = {
+  title: string
+  data: string[]
+}
+const sections: SectionItem[] = [
+  {
+    title: 'Category',
+    data: ['category'],
+  },
+  {
+    title: 'Recent',
+    data: ['recent'],
+  },
+  {
+    title: 'Classic',
+    data: ['classic'],
+  },
+]
+
+const CategorySection: React.FC = () => (
+  <View style={styles.homeCategory}>
+    <CategoryItem
+      iconComponent={AntDesign}
+      iconName="rocket1"
+      title="最新更新"
+      routeName={RouteName.LatestUpdates}
+    />
+    <CategoryItem
+      iconComponent={MaterialCommunityIcons}
+      iconName="inbox-arrow-up-outline"
+      title="最新上架"
+      routeName={RouteName.Details}
+    />
+    <CategoryItem
+      iconComponent={MaterialCommunityIcons}
+      iconName="crown-outline"
+      title="人氣榜"
+      routeName={RouteName.PopularList}
+    />
+    <CategoryItem
+      iconComponent={MaterialIcons}
+      iconName="category"
+      title="漫畫分類"
+      routeName={RouteName.ComicCategories}
+    />
+  </View>
+)
+
+const RecentSection: React.FC = () => (
+  <View style={styles.recentContainer}>
+    <View style={styles.moreContent}>
+      <Text style={styles.sectionTitle}>最近在看</Text>
+      <View style={styles.recentButtonContent}>
+        <Button
+          title="More"
+          titleStyle={styles.recentButtonTitle}
+          style={styles.recentButton}
+        />
+        <Ionicons name="arrow-redo" size={16} color={colors.warning} />
+      </View>
+    </View>
+    <RecentScrollView />
+  </View>
+)
+
+const ClassicSection: React.FC = () => (
+  <View style={styles.classicContainer}>
+    <View style={styles.moreContent}>
+      <Text style={styles.sectionTitle}>那些經典大作！</Text>
+      <View style={styles.recentButtonContent}>
+        <Button
+          title="More"
+          titleStyle={styles.recentButtonTitle}
+          style={styles.recentButton}
+        />
+        <Ionicons name="arrow-redo" size={16} color={colors.warning} />
+      </View>
+    </View>
+    <ClassicComic />
+  </View>
+)
+
+const renderItem: ListRenderItem<string> = ({ item }) => {
+  switch (item) {
+    case 'category':
+      return <CategorySection />
+    case 'recent':
+      return <RecentSection />
+    case 'classic':
+      return <ClassicSection />
+    default:
+      return null
+  }
+}
+
+const Profile: React.FC = () => {
+  return (
+    <SectionList
+      sections={sections}
+      renderItem={renderItem}
+      keyExtractor={(item, index) => item + index}
+      contentContainerStyle={styles.profilePage}
+    />
+  )
+}
+
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    flexDirection: 'column',
+  profilePage: {
+    backgroundColor: colors.white,
+    padding: 20,
+  },
+
+  homeCategory: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  recentContainer: {
+    marginTop: 30,
+  },
+
+  moreContent: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+
+  recentButtonTitle: {
+    fontSize: 14,
+    color: colors.black,
+    textAlign: 'center',
+  },
+  recentButton: {
+    paddingHorizontal: 5,
+  },
+  recentButtonContent: {
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.lightGrayPurple,
-  },
-  title: {
-    fontSize: 24,
-    marginBottom: 20,
+    paddingHorizontal: 8,
+    borderRadius: 22,
+    height: 32,
+    borderColor: colors.comicDarkGray,
+    borderWidth: 1,
   },
   buttonTitle: {
     fontSize: 16,
@@ -34,122 +170,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
+    marginTop: 20,
     paddingVertical: 8,
     paddingHorizontal: 16,
     borderRadius: 22,
-    backgroundColor: colors.lightPurple,
     height: 44,
     width: '50%',
+    backgroundColor: colors.lightPurple,
   },
-  container: {
-    flex: 1,
-    padding: 16,
-    backgroundColor: '#f5f5f5',
+  // 經典大作區域的ui
+  classicContainer: {
+    marginTop: 50,
   },
-  searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 16,
-    backgroundColor: '#F1F1F1',
-    borderRadius: 20,
-    paddingHorizontal: 28,
-    paddingVertical: 8,
-  },
-  searchInput: {
-    flex: 1,
-    marginLeft: 8,
-    height: 40,
-    fontSize: 16,
-  },
-  searchIcon: {
-    marginRight: 10,
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    paddingLeft: 10,
   },
 })
 
-export interface ChatListData {
-  caseId: number
-  caseName: string
-  companyName: string
-  unreadCount: number
-  content: string
-  totalCount: number
-}
-
-export default function Home({ navigation }: StackProps) {
-  const token =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4ZDBlMTlhMi01N2YyLTQ4YWItOTVjNi0yZjU2M2M1MzQzZDIiLCJqdGkiOiI2NDM4MmYzNC1jYjRjLTQzMmYtYmUwZS0yMGNjM2Y3NWRhY2IiLCJuYmYiOjE3MjE5NjI2MTEsImV4cCI6MTcyMjYxMDYxMSwiaWF0IjoxNzIxOTYyNjExLCJpc3MiOiJNZW1iZXIuQVBJIn0.AF9oTz1CuT6PmkKkX3bK1Z2OQH-7kY-i0pW9H2QdAKA'
-  const [page, setPage] = useState<number>(1)
-  const [size, setSize] = useState<number>(10)
-  const [search, setSearch] = useState<string>('')
-  const Tab = createBottomTabNavigator()
-
-  const {
-    data: chatData,
-    error,
-    isLoading,
-  } = useQuery<ChatListData[]>({
-    queryKey: ['data', page, size],
-    queryFn: async () => {
-      const response = await axios.post(
-        'https://devmemberapi.pocketpro.tw/api/getchatroomlist',
-        {
-          page,
-          size,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json, text/plain, */*',
-            Authorization: 'Bearer ' + `${token}`,
-          },
-        },
-      )
-
-      return response.data.data
-    },
-  })
-
-  if (isLoading) {
-    return <ActivityIndicator />
-  }
-
-  if (error) {
-    return <Text>Error: {(error as Error).message}</Text>
-  }
-
-  return (
-    <View style={styles.root}>
-      <StatusBar barStyle="dark-content" />
-      {/* <Text style={styles.title}>Home</Text> */}
-      <View style={styles.container}>
-        <View style={styles.searchBar}>
-          <AntDesign
-            name="search1"
-            size={20}
-            color="#495B7D"
-            style={styles.searchIcon}
-          />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="搜尋"
-            // value={search}
-            // onChangeText={setSearch}
-          />
-        </View>
-
-        <FlatList
-          data={chatData}
-          keyExtractor={(item) => item.caseId.toString()}
-          renderItem={({ item }) => <ChatList item={item} />}
-          ListEmptyComponent={<Text>尚未有聊天內容</Text>}
-        />
-      </View>
-      {/* <Button
-        title="Go to Details"
-        titleStyle={styles.buttonTitle}
-        style={styles.button}
-        onPress={() => navigation.navigate('DetailsStack', { from: 'Home' })}
-      /> */}
-    </View>
-  )
-}
+export default Profile

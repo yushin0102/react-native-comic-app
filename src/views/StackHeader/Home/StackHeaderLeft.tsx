@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 
-export function StackHeaderLeft({ onPress }: { onPress: () => void }) {
+export function StackHeaderLeft() {
   return (
     <View style={styles.layoutHeader}>
       <Text style={styles.layoutDesc}>更新</Text>
