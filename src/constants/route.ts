@@ -11,6 +11,7 @@ export const RouteName = {
   NewArrivals: 'new-arrivals', // 最新上架
   PopularList: 'popular-list', // 人氣榜
   ComicCategories: 'comic-categories', // 漫畫分類
+  ComicDetailScreen: '漫畫詳細介紹',
 } as const
 
 // 定義路由參數的總合型別，對應不同的路由名稱
@@ -27,4 +28,5 @@ export type RootStackParamList = {
   [RouteName.NewArrivals]: undefined // 最新上架
   [RouteName.PopularList]: undefined // 人氣榜
   [RouteName.ComicCategories]: undefined // 漫畫分類
+  [RouteName.ComicDetailScreen]: { comicId: string } // 漫畫詳細介紹
 }

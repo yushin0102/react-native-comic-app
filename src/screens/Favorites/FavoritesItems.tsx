@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-
 import { Image } from 'expo-image'
 import { colors } from '@theme'
 import { FavoritesComic } from '@screens/Favorites/type'
@@ -10,42 +9,50 @@ const FavoriteItem: React.FC<{
   isEditing: boolean
   selectedIds: string[]
   onToggleSelect: (id: string) => void
-}> = ({ item, isEditing, selectedIds, onToggleSelect }) => (
-  <View style={styles.favoritesContainer}>
-    <View style={styles.imgesContext}>
-      <Image
-        source={item.imageUrl}
-        style={!isEditing ? styles.image : styles.favoritesHidden}
-      />
-      {item.newUpdate && (
-        <View style={styles.imgText}>
-          <Text>New</Text>
+}> = ({ item, isEditing, selectedIds, onToggleSelect }) => {
+  return (
+    <TouchableOpacity onPress={() => onToggleSelect(item.id)}>
+      <View style={styles.favoritesContainer}>
+        <View style={styles.imgesContext}>
+          <Image
+            source={item.imageUrl}
+            style={!isEditing ? styles.image : styles.favoritesHidden}
+          />
+          {item.newUpdate && (
+            <View style={styles.imgText}>
+              <Text>New</Text>
+            </View>
+          )}
+          <TouchableOpacity
+            onPress={() => onToggleSelect(item.id)}
+            style={
+              isEditing && [
+                styles.circle,
+                selectedIds.includes(item.id) && styles.checkedCircle,
+              ]
+            }
+          >
+            {selectedIds.includes(item.id) && isEditing && (
+              <View style={styles.innerCircle} />
+            )}
+          </TouchableOpacity>
         </View>
-      )}
-      <TouchableOpacity
-        style={
-          isEditing && [
-            styles.circle,
-            selectedIds.includes(item.id) && styles.checkedCircle,
-          ]
-        }
-        onPress={() => onToggleSelect(item.id)}
-      >
-        {selectedIds.includes(item.id) && isEditing && (
-          <View style={styles.innerCircle} />
-        )}
-      </TouchableOpacity>
-    </View>
-    <View style={styles.comicFotter}>
-      <Text style={styles.comicTitle} numberOfLines={1} ellipsizeMode="tail">
-        {item.title}
-      </Text>
-      <Text style={styles.comicTagText} numberOfLines={1}>
-        {item.comicTag}
-      </Text>
-    </View>
-  </View>
-)
+        <View style={styles.comicFotter}>
+          <Text
+            style={styles.comicTitle}
+            numberOfLines={1}
+            ellipsizeMode="tail"
+          >
+            {item.title}
+          </Text>
+          <Text style={styles.comicTagText} numberOfLines={1}>
+            {item.comicTag}
+          </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  )
+}
 
 const styles = StyleSheet.create({
   listContainer: {

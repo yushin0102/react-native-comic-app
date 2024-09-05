@@ -7,8 +7,8 @@ import { RouteName, RootStackParamList } from '@constants/route'
 import FavoritesScreen from '@screens/Favorites/FavoritesScreen'
 import Details from '@views/Details'
 import Profile from '@views/Profile'
+import ComicDetailScreen from '@screens/ComicDetail/ComicDetailScreen'
 import { FavoritesLeft, FavoritesRight } from '@views/StackHeader/Favorites'
-
 const Stack = createNativeStackNavigator<RootStackParamList>()
 
 const navigationProps = (navigation: DrawerProps['navigation']) => ({
@@ -45,6 +45,7 @@ export function ProfileStackNavigator({ navigation }: DrawerProps) {
   )
 }
 
+// 書籤的tab route 包含詳細頁面
 export function FavoritesScreenStackNavigator({ navigation }: DrawerProps) {
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const handleRemoveItem = () => {
@@ -76,6 +77,17 @@ export function FavoritesScreenStackNavigator({ navigation }: DrawerProps) {
           />
         )}
       </Stack.Screen>
+      <Stack.Screen
+        component={ComicDetailScreen}
+        name={RouteName.ComicDetailScreen}
+        options={{
+          gestureEnabled: true,
+          headerTitleAlign: 'center',
+          headerTitle: '',
+          headerLeft: undefined,
+          headerRight: undefined,
+        }}
+      />
     </Stack.Navigator>
   )
 }

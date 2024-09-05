@@ -7,11 +7,17 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
 } from 'react-native'
+import { RouteName } from '@constants/route'
 import { useNavigation } from '@react-navigation/native'
 
 import { colors } from '@theme'
-import { FavoritesScreenProps, FavoritesComic } from '@screens/Favorites/type'
-import FavoriteItem from '@views/StackHeader/Favorites/FavoritesItems'
+import {
+  FavoritesScreenProps,
+  FavoritesComic,
+  ComicDetailScreenNavigationProp,
+} from '@screens/Favorites/type'
+import FavoriteItem from '@screens/Favorites/FavoritesItems'
+
 const comicsData: FavoritesComic[] = [
   {
     id: '1',
@@ -47,15 +53,18 @@ const FavoritesScreen: React.FC<FavoritesScreenProps> = ({
   isEditing,
   onToggleEditMode,
 }) => {
-  const navigation = useNavigation()
-
+  const navigation = useNavigation<ComicDetailScreenNavigationProp>()
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [defaultData, setDefaultData] = useState<FavoritesComic[]>(comicsData)
 
   const handleToggleSelect = (id: string) => {
-    setSelectedIds((prv) =>
-      prv.includes(id) ? prv.filter((item) => item !== id) : [...prv, id],
-    )
+    if (!isEditing) {
+      navigation.navigate(RouteName.ComicDetailScreen, { comicId: id })
+    } else {
+      setSelectedIds((prv) =>
+        prv.includes(id) ? prv.filter((item) => item !== id) : [...prv, id],
+      )
+    }
   }
 
   const handleToggleSelectAll = () => {
