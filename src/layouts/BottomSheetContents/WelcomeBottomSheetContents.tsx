@@ -72,16 +72,11 @@ export function WelcomeBottomSheetContents({
 }: WelcomeBottomSheetContentsProps) {
   return (
     <View style={styles.root}>
-      <Text style={styles.title}>登入成功🎉Congratulations! </Text>
+      <Text style={styles.title}>歡迎🎉Congratulations! </Text>
       <Text style={[styles.subtitle, { marginBottom: 32 }]}>
-        You have successfully spin up the React Native Boilerplate project in
-        the
-        <Text
-          style={{ fontFamily: fonts.openSan.bold }}
-        >{` ${config.ENV} `}</Text>
-        environment 🚀
+        歡迎來到 雨 漫畫app🚀
       </Text>
-      <Text style={[styles.subtitle, { marginBottom: 8 }]}>
+      {/* <Text style={[styles.subtitle, { marginBottom: 8 }]}>
         Injected Environmental Variables:
       </Text>
       {Object.keys(config).map((key) => (
@@ -92,9 +87,9 @@ export function WelcomeBottomSheetContents({
       ))}
       <Text style={[styles.subtitle, { marginVertical: 32 }]}>
         {`Your foundational setup is now complete, paving the way for seamless development and innovation. \n\nHappy coding!`}
-      </Text>
+      </Text> */}
       <GradientButton
-        title="OK"
+        title="確認"
         titleStyle={styles.buttonTitle}
         style={styles.button}
         gradientBackgroundProps={{
