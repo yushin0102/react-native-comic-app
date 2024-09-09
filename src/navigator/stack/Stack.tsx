@@ -1,35 +1,22 @@
 import React, { useState } from 'react'
-import { createNativeStackNavigator } from '@react-navigation/native-stack'
-// import { DrawerProps } from '../drawer/Drawer.typeDefs'
+import { createStackNavigator } from '@react-navigation/stack'
+// import { createNativeStackNavigator } from '@react-navigation/native-stack'
+// createNativeStackNavigator 比較適合沒要求太多客製化動畫手勢的地方
 import { StackHeaderLeft } from '@views/StackHeader/Home/StackHeaderLeft'
 import { HomeSearch } from '@views/StackHeader/Home/HomeSearch'
 import { RouteName, RootStackParamList } from '@constants/route'
 import FavoritesScreen from '@screens/Favorites/FavoritesScreen'
 import Details from '@views/Details'
 import Home from '@views/Home'
-import { TouchableOpacity, StyleSheet } from 'react-native'
-import { useNavigation } from '@react-navigation/native'
-import AntDesign from '@expo/vector-icons/AntDesign'
-import { ComicDetailScreenRouteProp } from '@screens/ComicDetail/type'
 import ComicDetailScreen from '@screens/ComicDetail/ComicDetailScreen'
 import { FavoritesLeft, FavoritesRight } from '@views/StackHeader/Favorites'
-
-const Stack = createNativeStackNavigator<RootStackParamList>()
+import ComicDetailScreenHeader from '@views/ComicDetailView/ScreenHeader'
+const Stack = createStackNavigator<RootStackParamList>()
 
 const customDefalutStackProps = () => ({
   headerShadowVisible: false, // 把最上面的bar陰影線隱藏
   headerTitleAlign: 'center' as const, // as const 是為了讓ts知道headerTitleAlign是一個固定的值
   headerTitle: '',
-})
-
-const styles = StyleSheet.create({
-  backButton: {
-    position: 'absolute',
-    top: 60,
-    left: 20,
-    fontSize: 26,
-    color: 'black',
-  },
 })
 
 export function ProfileStackNavigator() {
@@ -53,14 +40,22 @@ export function ProfileStackNavigator() {
           headerTitle: '',
         }}
       />
+      {/* 首頁前往漫畫介紹頁面 一定要寫在同個screen中 因為是不同Tab rn會報錯 */}
+      <Stack.Screen
+        component={ComicDetailScreen}
+        name={RouteName.ComicDetailScreen}
+        options={{
+          gestureEnabled: true,
+          gestureResponseDistance: 250, // 手勢反應距離
+          header: () => <ComicDetailScreenHeader />,
+        }}
+      />
     </Stack.Navigator>
   )
 }
 
 // 書籤的tab route 包含詳細頁面
 export function FavoritesScreenStackNavigator() {
-  const navigation = useNavigation<ComicDetailScreenRouteProp>()
-
   const [isEditing, setIsEditing] = useState<boolean>(false)
   const handleRemoveItem = () => {
     setIsEditing((prevState) => !prevState)
@@ -92,20 +87,9 @@ export function FavoritesScreenStackNavigator() {
         component={ComicDetailScreen}
         name={RouteName.ComicDetailScreen}
         options={{
-          headerLeft: undefined,
-          headerRight: undefined,
-          // headerShown: false, // 隱藏header
-          header: () => (
-            <TouchableOpacity
-              onPress={() => navigation.navigate(RouteName.BookFavoritesStack)}
-            >
-              <AntDesign
-                name="leftcircle"
-                size={24}
-                style={styles.backButton}
-              />
-            </TouchableOpacity>
-          ),
+          gestureEnabled: true,
+          gestureResponseDistance: 250, // 手勢滑動反應距離
+          header: () => <ComicDetailScreenHeader />,
         }}
       />
     </Stack.Navigator>

@@ -1,6 +1,7 @@
 export const RouteName = {
   Home: '首頁',
   HomeStack: '首頁Stack',
+  HomeComicDetail: '首頁漫畫詳細介紹',
   Profile: '我的',
   Settings: '設定',
   Details: '詳細資料',
@@ -32,5 +33,8 @@ export type RootStackParamList = {
   [RouteName.NewArrivals]: undefined // 最新上架
   [RouteName.PopularList]: undefined // 人氣榜
   [RouteName.ComicCategories]: undefined // 漫畫分類
-  [RouteName.ComicDetailScreen]: { comicId: string } // 漫畫詳細介紹
+  [RouteName.ComicDetailScreen]: {
+    screen: keyof RootStackParamList
+    params?: { comicId: string }
+  }
 }

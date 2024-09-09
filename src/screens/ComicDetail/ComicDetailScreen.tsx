@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, StyleSheet, Animated, Text } from 'react-native'
+import { View, StyleSheet, Animated } from 'react-native'
 // import { RouteProp, useRoute } from '@react-navigation/native'
 import { Image } from 'expo-image'
-
+import { colors } from '@theme'
+import ComicDetailView from '@views/ComicDetailView/ComicDetailView'
 const ComicDetailScreen: React.FC = () => {
   const scrollY = new Animated.Value(0)
 
@@ -22,6 +23,7 @@ const ComicDetailScreen: React.FC = () => {
           style={styles.image}
         />
       </Animated.View>
+
       <Animated.ScrollView
         contentContainerStyle={styles.scrollViewContent}
         onScroll={Animated.event(
@@ -30,9 +32,10 @@ const ComicDetailScreen: React.FC = () => {
         )}
         scrollEventThrottle={16}
       >
-        <View />
-        <View style={styles.content}>
-          <Text>123測試</Text>
+        <View style={styles.panelContainer}>
+          <View style={styles.content}>
+            <ComicDetailView />
+          </View>
         </View>
       </Animated.ScrollView>
     </View>
@@ -41,17 +44,16 @@ const ComicDetailScreen: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    backgroundColor: colors.comicLightGray,
   },
   scrollViewContent: {
-    paddingTop: 200,
+    paddingTop: 250,
   },
   imageContainer: {
     position: 'absolute',
-    top: 0,
     left: 0,
     right: 0,
-    height: 200,
+    height: 250,
     overflow: 'hidden',
   },
   image: {
@@ -59,8 +61,18 @@ const styles = StyleSheet.create({
     height: '100%',
     resizeMode: 'cover',
   },
+  panelContainer: {
+    backgroundColor: 'white',
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5, // Android 上的陰影
+  },
   content: {
-    padding: 16,
+    height: 1000, //! 記得移除
   },
 })
 

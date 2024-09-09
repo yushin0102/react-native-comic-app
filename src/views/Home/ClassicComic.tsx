@@ -1,7 +1,16 @@
 import React from 'react'
-import { View, Text, StyleSheet, FlatList, ListRenderItem } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  FlatList,
+  ListRenderItem,
+} from 'react-native'
 import { Image } from 'expo-image'
 import { colors } from '@theme'
+import { useNavigation, NavigationProp } from '@react-navigation/native'
+import { RouteName, RootStackParamList } from '@constants/route'
 
 interface Comic {
   id: string
@@ -49,19 +58,31 @@ const comics: Comic[] = [
   },
 ]
 
-const renderItem: ListRenderItem<Comic> = ({ item }) => (
-  <View style={styles.profileContainer}>
-    <Image source={item.imageUrl} style={styles.image} />
-    <Text style={styles.comicTitle} numberOfLines={1} ellipsizeMode="tail">
-      {item.title}
-    </Text>
-    <Text style={styles.comicTagText} numberOfLines={1}>
-      {item.comicTag}
-    </Text>
-  </View>
-)
-
 const ClassicComic: React.FC = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
+
+  const renderItem: ListRenderItem<Comic> = ({ item }) => (
+    <TouchableOpacity
+      style={{ flex: 1 }}
+      onPress={() =>
+        navigation.navigate(RouteName.ComicDetailScreen, {
+          screen: RouteName.ComicDetailScreen,
+          params: { comicId: item.id },
+        })
+      }
+    >
+      <View style={styles.profileContainer}>
+        <Image source={item.imageUrl} style={styles.image} />
+        <Text style={styles.comicTitle} numberOfLines={1} ellipsizeMode="tail">
+          {item.title}
+        </Text>
+        <Text style={styles.comicTagText} numberOfLines={1}>
+          {item.comicTag}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  )
+
   return (
     <FlatList
       data={comics}
