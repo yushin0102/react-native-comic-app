@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   View,
   Text,
@@ -6,11 +6,14 @@ import {
   TouchableOpacity,
   FlatList,
   ListRenderItem,
+  Pressable,
+  Modal,
 } from 'react-native'
 import { Image } from 'expo-image'
 import { colors } from '@theme'
 import { useNavigation, NavigationProp } from '@react-navigation/native'
 import { RouteName, RootStackParamList } from '@constants/route'
+import * as Haptics from 'expo-haptics'
 
 interface Comic {
   id: string
@@ -60,16 +63,38 @@ const comics: Comic[] = [
 
 const ClassicComic: React.FC = () => {
   const navigation = useNavigation<NavigationProp<RootStackParamList>>()
+  const [isModalVisible, setModalVisible] = useState<boolean>(false)
+
+  // const handlePressIn = () => {
+  //   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy)
+  //   setModalVisible(true)
+  // }
+
+  // const handlePressOut = () => {
+  //   setModalVisible(false)
+  // }
+
+  const handleLongPress = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy) // 觸發震動反饋
+    setModalVisible(true) // 顯示 3D Touch 模態
+    setTimeout(() => {
+      setModalVisible(false)
+    }, 1000)
+  }
+
+  const handlePress = (id: string) => {
+    Haptics.selectionAsync() // 觸發選擇反饋
+    navigation.navigate(RouteName.ComicDetailScreen, {
+      screen: RouteName.ComicDetailScreen,
+      params: { comicId: id },
+    })
+  }
 
   const renderItem: ListRenderItem<Comic> = ({ item }) => (
     <TouchableOpacity
       style={{ flex: 1 }}
-      onPress={() =>
-        navigation.navigate(RouteName.ComicDetailScreen, {
-          screen: RouteName.ComicDetailScreen,
-          params: { comicId: item.id },
-        })
-      }
+      onLongPress={handleLongPress}
+      onPress={() => handlePress(item.id)}
     >
       <View style={styles.profileContainer}>
         <Image source={item.imageUrl} style={styles.image} />
@@ -80,6 +105,14 @@ const ClassicComic: React.FC = () => {
           {item.comicTag}
         </Text>
       </View>
+
+      <Modal visible={isModalVisible} transparent animationType="slide">
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text>3D Touch Modal Content</Text>
+          </View>
+        </View>
+      </Modal>
     </TouchableOpacity>
   )
 
@@ -120,6 +153,18 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderColor: colors.comicDarkGray,
     borderWidth: 1,
+  },
+
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  modalContent: {
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
   },
 })
 
