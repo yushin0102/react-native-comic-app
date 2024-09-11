@@ -10,7 +10,7 @@ import Details from '@views/Details'
 import Home from '@views/Home'
 import ComicDetailScreen from '@screens/ComicDetail/ComicDetailScreen'
 import { FavoritesLeft, FavoritesRight } from '@views/StackHeader/Favorites'
-import ComicDetailScreenHeader from '@views/ComicDetailView/ScreenHeader'
+import ComicDetailHeaderBackIcon from '@views/ComicDetailView/HeaderBackIcon'
 const Stack = createStackNavigator<RootStackParamList>()
 
 const customDefalutStackProps = () => ({
@@ -47,7 +47,7 @@ export function ProfileStackNavigator() {
         options={{
           gestureEnabled: true,
           gestureResponseDistance: 250, // 手勢反應距離
-          header: () => <ComicDetailScreenHeader />,
+          header: () => <ComicDetailHeaderBackIcon />,
         }}
       />
     </Stack.Navigator>
@@ -89,7 +89,7 @@ export function FavoritesScreenStackNavigator() {
         options={{
           gestureEnabled: true,
           gestureResponseDistance: 250, // 手勢滑動反應距離
-          header: () => <ComicDetailScreenHeader />,
+          header: () => <ComicDetailHeaderBackIcon />,
         }}
       />
     </Stack.Navigator>

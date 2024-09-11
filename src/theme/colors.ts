@@ -6,6 +6,7 @@ export const colors = {
   comicWhiteBoder: '#F5F5F5',
   comicBlackTitle: '#3F3F35',
   comicRanking: '#F67B2F',
+  borderColorLight: '#FFEFDC',
   darkPurple: '#231d54',
   purple: '#8100ff',
   lightPurple: '#9388db',

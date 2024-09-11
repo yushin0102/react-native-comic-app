@@ -1,12 +1,11 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native'
-import { RouteName } from '@constants/route'
-import { ComicDetailScreenRouteProp } from '@screens/ComicDetail/type'
+import { useNavigation, NavigationProp } from '@react-navigation/native'
+import { RouteName, RootStackParamList } from '@constants/route'
 
-const ComicDetailScreenHeader: React.FC = () => {
-  const navigation = useNavigation<ComicDetailScreenRouteProp>()
+const ComicDetailHeaderBackIcon: React.FC = () => {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
 
   return (
     <TouchableOpacity
@@ -19,8 +18,12 @@ const ComicDetailScreenHeader: React.FC = () => {
 
 const styles = StyleSheet.create({
   backButton: {
-    marginLeft: 10,
+    position: 'absolute',
+    top: 60,
+    left: 20,
+    fontSize: 26,
+    color: 'black',
   },
 })
 
-export default ComicDetailScreenHeader
+export default ComicDetailHeaderBackIcon

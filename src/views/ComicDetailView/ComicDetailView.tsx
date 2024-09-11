@@ -2,7 +2,7 @@ import { colors } from '@theme'
 import React, { useState } from 'react'
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
-
+import DetailFooter from '@views/ComicDetailView/DetailFooter'
 const ComicDetailView: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const toggleExpanded = () => setIsExpanded((prev) => !prev)
@@ -50,6 +50,7 @@ const ComicDetailView: React.FC = () => {
           <Text style={styles.desc}>漫畫評分</Text>
         </View>
       </View>
+      <DetailFooter />
     </View>
   )
 }
