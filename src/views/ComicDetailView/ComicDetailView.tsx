@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
   },
   updateInfoContentWithBorder: {
     alignItems: 'center',
-    padding: 15,
+    padding: 10,
     flex: 1,
     borderRightWidth: 1,
     borderRightColor: colors.comicWhiteBoder,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   },
   updateInfoContent: {
     alignItems: 'center',
-    padding: 15,
+    padding: 10,
     flex: 1,
   },
   desc: {
