@@ -5,7 +5,7 @@ export function StackHeaderLeft() {
   return (
     <View style={styles.layoutHeader}>
       <Text style={styles.layoutDesc}>更新</Text>
-      <Text style={styles.layoutDesc}>推薦</Text>
+      <Text style={styles.focused}>推薦</Text>
       <Text style={styles.layoutDesc}>男生</Text>
       <Text style={styles.layoutDesc}>女生</Text>
     </View>
@@ -14,13 +14,16 @@ export function StackHeaderLeft() {
 
 const styles = StyleSheet.create({
   layoutHeader: {
-    display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginLeft: 10,
   },
   layoutDesc: {
     fontSize: 16,
-    padding: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  focused: {
+    fontWeight: 'bold',
+    fontSize: 28,
   },
 })

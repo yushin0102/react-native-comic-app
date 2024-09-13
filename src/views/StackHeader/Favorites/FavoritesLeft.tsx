@@ -33,6 +33,7 @@ export const FavoritesLeft: React.FC<FavoritesLeftProps> = ({ onPress }) => {
 
 const styles = StyleSheet.create({
   layoutHeader: {
+    marginLeft: 10,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',

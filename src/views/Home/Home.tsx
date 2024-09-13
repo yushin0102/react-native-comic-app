@@ -126,7 +126,8 @@ const Profile: React.FC = () => {
 const styles = StyleSheet.create({
   profilePage: {
     backgroundColor: colors.white,
-    padding: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
   },
 
   homeCategory: {

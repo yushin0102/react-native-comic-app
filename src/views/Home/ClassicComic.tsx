@@ -122,15 +122,11 @@ const ClassicComic: React.FC = () => {
       renderItem={renderItem}
       keyExtractor={(item) => item.id}
       numColumns={2} // 每行顯示兩個項目
-      contentContainerStyle={styles.listContainer}
     />
   )
 }
 
 const styles = StyleSheet.create({
-  listContainer: {
-    paddingHorizontal: 10,
-  },
   profileContainer: {
     flex: 1,
     margin: 10,
@@ -142,7 +138,7 @@ const styles = StyleSheet.create({
   comicTitle: {
     marginTop: 10,
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: 'left',
   },
   comicTagText: {
     marginTop: 5,

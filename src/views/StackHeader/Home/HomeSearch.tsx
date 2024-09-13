@@ -23,6 +23,7 @@ export function HomeSearch() {
 
 const styles = StyleSheet.create({
   button: {
+    marginRight: 5,
     padding: 10,
   },
   icon: {

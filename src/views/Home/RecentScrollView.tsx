@@ -91,12 +91,12 @@ const styles = StyleSheet.create({
   comicTitle: {
     marginTop: 10,
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: 'left',
   },
   comicDesc: {
     marginTop: 5,
     fontSize: 16,
-    textAlign: 'center',
+    textAlign: 'left',
     color: colors.comicDarkGray,
   },
 })

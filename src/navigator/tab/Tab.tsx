@@ -18,6 +18,7 @@ export default function TabNavigator() {
         headerShown: false,
         tabBarActiveBackgroundColor: colors.white,
         tabBarStyle: styles.tabBar,
+        tabBarLabelStyle: styles.tabBarLabel,
       })}
     >
       <Tab.Screen name={RouteName.Home} component={ProfileStackNavigator} />
@@ -38,5 +39,8 @@ export default function TabNavigator() {
 const styles = StyleSheet.create({
   tabBar: {
     height: 85,
+  },
+  tabBarLabel: {
+    color: colors.black,
   },
 })

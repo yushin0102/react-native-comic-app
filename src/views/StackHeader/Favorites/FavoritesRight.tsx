@@ -16,5 +16,6 @@ export const FavoritesRight: React.FC<FavoritesScreenProps> = ({
 const styles = StyleSheet.create({
   button: {
     padding: 10,
+    marginRight: 5,
   },
 })
