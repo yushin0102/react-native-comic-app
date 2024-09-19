@@ -15,6 +15,8 @@ export const RouteName = {
   ComicCategories: 'comic-categories', // 漫畫分類
   ComicDetailScreen: '漫畫詳細介紹',
   BookFavoritesStack: '書架Stack',
+  ComicContentScreen: '漫畫內容',
+  ComicContentStack: '漫畫內容Stack',
 } as const
 
 // 定義路由參數的總合型別，對應不同的路由名稱
@@ -37,4 +39,8 @@ export type RootStackParamList = {
     screen: keyof RootStackParamList
     params?: { comicId: string }
   }
+  [RouteName.ComicContentScreen]: {
+    params: { comicId: string }
+    screen: keyof RootStackParamList
+  } // 漫畫內容的路由參數
 }

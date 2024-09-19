@@ -1,19 +1,35 @@
 import React from 'react'
-import { View, StyleSheet, Animated, Text } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Animated,
+  Text,
+  TouchableOpacity,
+} from 'react-native'
 // import { RouteProp, useRoute } from '@react-navigation/native'
 import { Image } from 'expo-image'
 import { colors } from '@theme'
 import Ionicons from '@expo/vector-icons/Ionicons'
+import { useNavigation, NavigationProp } from '@react-navigation/native'
+import { RouteName, RootStackParamList } from '@constants/route'
 
 import ComicDetailView from '@views/ComicDetailView/ComicDetailView'
 const ComicDetailScreen: React.FC = () => {
   const scrollY = new Animated.Value(0)
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>()
 
   const scale = scrollY.interpolate({
     inputRange: [-200, 0],
     outputRange: [1.5, 1],
     extrapolate: 'clamp',
   })
+
+  const handlePress = (id: string) => {
+    navigation.navigate(RouteName.ComicContentScreen, {
+      screen: RouteName.ComicContentScreen,
+      params: { comicId: id },
+    })
+  }
 
   return (
     <View style={styles.container}>
@@ -47,7 +63,9 @@ const ComicDetailScreen: React.FC = () => {
                 <Text style={styles.savedText}>已收藏</Text>
               </View>
               <View style={styles.continueButton}>
-                <Text style={styles.continueText}>繼續看第1132話</Text>
+                <TouchableOpacity onPress={() => handlePress('1132')}>
+                  <Text style={styles.continueText}>繼續看第1132話</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>

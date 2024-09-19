@@ -8,7 +8,9 @@ import { RouteName, RootStackParamList } from '@constants/route'
 import FavoritesScreen from '@screens/Favorites/FavoritesScreen'
 import Details from '@views/Details'
 import Home from '@views/Home'
+import ComicContentScreen from '@screens/ComicContent/ComicContentScreen'
 import ComicDetailScreen from '@screens/ComicDetail/ComicDetailScreen'
+
 import { FavoritesLeft, FavoritesRight } from '@views/StackHeader/Favorites'
 import ComicDetailHeaderBackIcon from '@views/ComicDetailView/HeaderBackIcon'
 const Stack = createStackNavigator<RootStackParamList>()
@@ -90,6 +92,14 @@ export function FavoritesScreenStackNavigator() {
           gestureEnabled: true,
           gestureResponseDistance: 250, // 手勢滑動反應距離
           header: () => <ComicDetailHeaderBackIcon />,
+        }}
+      />
+      <Stack.Screen
+        name={RouteName.ComicContentScreen}
+        component={ComicContentScreen}
+        options={{
+          headerShown: false,
+          gestureResponseDistance: 250, // 手勢滑動反應距離
         }}
       />
     </Stack.Navigator>
