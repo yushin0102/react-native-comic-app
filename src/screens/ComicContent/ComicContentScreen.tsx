@@ -1,62 +1,62 @@
-import React, { useEffect, useState } from 'react'
-import Slider from '@react-native-community/slider' // 需要安裝 @react-native-community/slider
+import React from 'react'
 import {
-  Text,
   View,
   StyleSheet,
-  SectionList,
-  ListRenderItem,
-  Modal,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
+  FlatList,
 } from 'react-native'
-import * as Brightness from 'expo-brightness'
-import Button from '@components/Button'
-import Feather from '@expo/vector-icons/Feather'
-const ComicContentScreen: React.FC = () => {
-  const [isModalVisible, setModalVisible] = useState(false)
-  const [brightness, setBrightness] = useState(1) // 預設螢幕亮度
-
-  // 請求調整螢幕亮度的權限
-  useEffect(() => {
-    const getBrightness = async () => {
-      const { status } = await Brightness.requestPermissionsAsync()
-      if (status !== 'granted') {
-        alert('Permission to adjust brightness is required!')
-        return
-      }
-      const currentBrightness = await Brightness.getBrightnessAsync()
-      setBrightness(currentBrightness)
-    }
-    getBrightness()
-  }, [])
-
-  const handleBrightnessChange = async (value: number) => {
-    setBrightness(value)
-    await Brightness.setBrightnessAsync(value) // 調整螢幕亮度
+import { Image } from 'expo-image'
+import BottomTabBar from '@views/ComicContentView/BottomTabBar'
+import { ComicContentScreenProps } from '@screens/ComicContent/type'
+const ComicContentScreen: React.FC<ComicContentScreenProps> = ({
+  isTouchComicContent,
+  onTouchComicContent,
+}) => {
+  interface ComicContent {
+    id: string
+    imageUrl: string | { uri: string }
   }
 
+  const comicDefaultData: ComicContent[] = [
+    {
+      id: '1',
+      imageUrl: require('@assets/images/comicContent1.png'),
+    },
+    {
+      id: '2',
+      imageUrl: require('@assets/images/comicContent2.png'),
+    },
+    {
+      id: '3',
+      imageUrl: require('@assets/images/comicContent3.png'),
+    },
+    {
+      id: '4',
+      imageUrl: require('@assets/images/comicContent1.png'),
+    },
+    {
+      id: '5',
+      imageUrl: require('@assets/images/comicContent2.png'),
+    },
+  ]
+
   return (
-    <View style={{ marginTop: 100 }}>
-      <Text>漫畫詳細圖頁面 </Text>
-      <TouchableOpacity onPress={() => setModalVisible(true)}>
-        <Feather name="sun" size={24} color="black" />
-      </TouchableOpacity>
-      <Modal visible={isModalVisible} transparent animationType="slide">
-        <View style={styles.modalContainer}>
-          <View style={styles.modalContent}>
-            <Slider
-              style={{ width: 300, height: 40 }}
-              minimumValue={0}
-              maximumValue={1}
-              value={brightness}
-              onValueChange={handleBrightnessChange}
-              minimumTrackTintColor="#FFFFFF"
-              maximumTrackTintColor="#000000"
-            />
-            <Button title="Close" onPress={() => setModalVisible(false)} />
-          </View>
+    <View style={styles.container}>
+      {/* 點選漫畫內容時，隱藏header的ui 要修成動畫現在很跳 */}
+      <FlatList
+        data={comicDefaultData}
+        renderItem={({ item }) => (
+          <TouchableWithoutFeedback onPress={onTouchComicContent}>
+            <Image source={item.imageUrl} style={styles.image} />
+          </TouchableWithoutFeedback>
+        )}
+        keyExtractor={(item, index) => index.toString()}
+      />
+      {isTouchComicContent && (
+        <View style={styles.bottomFix}>
+          <BottomTabBar />
         </View>
-      </Modal>
+      )}
     </View>
   )
 }
@@ -65,20 +65,17 @@ export default ComicContentScreen
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    minHeight: 830,
   },
-  modalContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  bottomFix: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
-  modalContent: {
-    backgroundColor: 'white',
-    padding: 20,
-    borderRadius: 10,
-    alignItems: 'center',
+  image: {
+    width: '100%',
+    height: 500,
+    resizeMode: 'cover',
   },
 })

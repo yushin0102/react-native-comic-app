@@ -7,11 +7,13 @@
 5. 移動檔案後清除 : `npm start -- --reset-cache`
 
 設定icon圖片在：src/theme/images.ts
-最下面的footer bar是在：src/navigator/Tab.tsx
-畫相關的頁面是要放在:src/screens
+主要頁面相關的是要放在:src/screens
+部分功能頁面放在:src/views
 
-eslintrc設定裡面的parserOptions路徑要整為如下:
+# React Native App 模擬流程
 
-記得push前要改成 "project": "./tsconfig.json"
+您無需登入 Figma 即可直接瀏覽我使用 React Native 開發中的Expo app 模擬流程（使用 Figma-prototype 進行預覽）。該專案目前仍在開發階段，功能尚在持續增強和改進中。
 
-正常是使用"project": "./Member.ReactNative/tsconfig.json"
+由於我尚未加入 Apple Developer Program，因此目前無法將應用程式上架至 App Store 或提供 IPA 檔案進行測試。不過，您可以通過以下連結查看應用的 Figma 模擬流程：
+
+🔗 [點擊此處查看 Figma 預覽](https://bit.ly/4euvIiK)

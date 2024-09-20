@@ -10,7 +10,6 @@ import Details from '@views/Details'
 import Home from '@views/Home'
 import ComicContentScreen from '@screens/ComicContent/ComicContentScreen'
 import ComicDetailScreen from '@screens/ComicDetail/ComicDetailScreen'
-
 import { FavoritesLeft, FavoritesRight } from '@views/StackHeader/Favorites'
 import ComicDetailHeaderBackIcon from '@views/ComicDetailView/HeaderBackIcon'
 const Stack = createStackNavigator<RootStackParamList>()
@@ -59,23 +58,35 @@ export function ProfileStackNavigator() {
 // 書籤的tab route 包含詳細頁面
 export function FavoritesScreenStackNavigator() {
   const [isEditing, setIsEditing] = useState<boolean>(false)
+  const [isTouchComicContent, setIsTouchComicContent] = useState<boolean>(true)
+  const defaultScreenOptions = {
+    gestureEnabled: true,
+    gestureResponseDistance: 200,
+  }
+
+  const renderFavoritesScreenOptions = {
+    headerLeft: () => <FavoritesLeft />,
+    headerRight: () => (
+      <FavoritesRight
+        onToggleEditMode={handleRemoveItem}
+        isEditing={isEditing}
+      />
+    ),
+  }
+
   const handleRemoveItem = () => {
     setIsEditing((prevState) => !prevState)
+  }
+
+  const handleTouchComicContent = () => {
+    setIsTouchComicContent((prevState) => !prevState)
   }
 
   return (
     <Stack.Navigator screenOptions={customDefalutStackProps}>
       <Stack.Screen
         name={RouteName.BookFavoritesStack}
-        options={{
-          headerLeft: () => <FavoritesLeft />,
-          headerRight: () => (
-            <FavoritesRight
-              onToggleEditMode={handleRemoveItem}
-              isEditing={isEditing}
-            />
-          ),
-        }}
+        options={renderFavoritesScreenOptions}
       >
         {(props) => (
           <FavoritesScreen
@@ -89,19 +100,35 @@ export function FavoritesScreenStackNavigator() {
         component={ComicDetailScreen}
         name={RouteName.ComicDetailScreen}
         options={{
-          gestureEnabled: true,
-          gestureResponseDistance: 250, // 手勢滑動反應距離
+          ...defaultScreenOptions,
           header: () => <ComicDetailHeaderBackIcon />,
         }}
       />
       <Stack.Screen
         name={RouteName.ComicContentScreen}
-        component={ComicContentScreen}
         options={{
-          headerShown: false,
-          gestureResponseDistance: 250, // 手勢滑動反應距離
+          ...defaultScreenOptions,
+          headerBackTitle: '',
+          headerBackTitleStyle: {
+            display: isTouchComicContent ? 'none' : 'none',
+          },
+          headerLeft: isTouchComicContent ? undefined : () => null,
+          headerTintColor: 'black',
+          headerLeftContainerStyle: {
+            paddingLeft: 15,
+          },
+          // headerShown: isTouchComicContent,
+          // 點選漫畫內容時，隱藏header的ui 要修成動畫現在很跳
         }}
-      />
+      >
+        {(props) => (
+          <ComicContentScreen
+            {...props}
+            isTouchComicContent={isTouchComicContent}
+            onTouchComicContent={handleTouchComicContent}
+          />
+        )}
+      </Stack.Screen>
     </Stack.Navigator>
   )
 }

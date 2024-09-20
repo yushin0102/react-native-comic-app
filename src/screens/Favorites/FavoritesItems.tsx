@@ -55,11 +55,6 @@ const FavoriteItem: React.FC<{
 }
 
 const styles = StyleSheet.create({
-  listContainer: {
-    marginTop: 10,
-    paddingHorizontal: 15,
-    backgroundColor: colors.white,
-  },
   favoritesContainer: {
     flex: 1,
     margin: 10,
