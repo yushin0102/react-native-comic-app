@@ -15,7 +15,7 @@ export const RouteName = {
   ComicCategories: 'comic-categories', // 漫畫分類
   ComicDetailScreen: '漫畫詳細介紹',
   BookFavoritesStack: '書架Stack',
-  ComicContentScreen: '漫畫內容',
+  ComicContentScreen: '漫畫圖片內容',
   ComicContentStack: '漫畫內容Stack',
 } as const
 
@@ -28,19 +28,22 @@ export type RootStackParamList = {
   [RouteName.Settings]: { theme: string }
   [RouteName.ContractList]: { contractId: string }
   [RouteName.TaskCalendar]: { taskId: string }
-  [RouteName.BookFavorites]: undefined
   [RouteName.BookFavoritesStack]: undefined
   [RouteName.BookFavoritesDetail]: { BookFavoritesId: string }
   [RouteName.LatestUpdates]: undefined // 最新更新
   [RouteName.NewArrivals]: undefined // 最新上架
   [RouteName.PopularList]: undefined // 人氣榜
   [RouteName.ComicCategories]: undefined // 漫畫分類
-  [RouteName.ComicDetailScreen]: {
+  [RouteName.BookFavorites]: {
     screen: keyof RootStackParamList
     params?: { comicId: string }
   }
+  [RouteName.ComicDetailScreen]: {
+    screen: keyof RootStackParamList
+    params?: { comicId: string }
+  } // 漫畫詳細介紹的路由參數
   [RouteName.ComicContentScreen]: {
     params: { comicId: string }
     screen: keyof RootStackParamList
-  } // 漫畫內容的路由參數
+  } // 漫畫圖片內容的路由參數
 }

@@ -6,7 +6,6 @@ import {
   TouchableOpacity,
   FlatList,
   ListRenderItem,
-  Pressable,
   Modal,
 } from 'react-native'
 import { Image } from 'expo-image'
@@ -84,7 +83,9 @@ const ClassicComic: React.FC = () => {
 
   const handlePress = (id: string) => {
     Haptics.selectionAsync() // 觸發選擇反饋
-    navigation.navigate(RouteName.ComicDetailScreen, {
+    navigation.navigate(RouteName.BookFavorites, {
+      // 從首頁跳轉到書籤頁的漫畫詳細頁
+      // 需要指定書籤頁的Stack名稱，才能使用其底下的路由
       screen: RouteName.ComicDetailScreen,
       params: { comicId: id },
     })

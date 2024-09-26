@@ -1,2 +1,3 @@
 export * from './Stack.typeDefs'
-export * from './Stack'
+export * from './FavStackNavigator'
+export * from './HomeNavigator'

@@ -1,9 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import {
-  ProfileStackNavigator,
-  FavoritesScreenStackNavigator,
-} from '../stack/Stack'
+import { HomeNavigator, FavStackNavigator } from '../stack'
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native'
 
 import { colors } from '@theme'
@@ -30,17 +27,14 @@ export default function TabNavigator() {
         tabBarLabelStyle: styles.tabBarLabel,
       })}
     >
-      <Tab.Screen name={RouteName.Home} component={ProfileStackNavigator} />
-      <Tab.Screen
-        name={RouteName.ContractList}
-        component={ProfileStackNavigator}
-      />
+      <Tab.Screen name={RouteName.Home} component={HomeNavigator} />
+      <Tab.Screen name={RouteName.ContractList} component={HomeNavigator} />
       <Tab.Screen
         name={RouteName.BookFavorites}
-        component={FavoritesScreenStackNavigator}
+        component={FavStackNavigator}
       />
       {/* 書籤的tab route */}
-      <Tab.Screen name={RouteName.Profile} component={ProfileStackNavigator} />
+      <Tab.Screen name={RouteName.Profile} component={HomeNavigator} />
     </Tab.Navigator>
   )
 }
